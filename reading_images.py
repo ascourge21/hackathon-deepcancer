@@ -15,6 +15,7 @@ src = '/Users/nripesh/Downloads/sample_images/'
 im1 = 'bf86db180c5768eea526e69e125b06e5.dcm'
 
 # find the number of files in each folder
+dir_names = []
 all_dirs = []
 dir_length = []
 for folder in listdir(src):
@@ -27,25 +28,30 @@ for folder in listdir(src):
         print("number of files in folder: " + str(len(dir_files)))
         all_dirs.append(dir_files)
         dir_length.append(len(dir_files))
+        dir_names.append(folder)
 
-onlyfiles = [f for f in listdir(src) if isfile(join(src, f))]
-im_array = np.zeros([512, 512, len(onlyfiles)]).astype('float32')
 
 low_bnd = -800
 up_bnd = 1200
 
-for f in onlyfiles:
-    plan = dicom.read_file(src + f)
+for dir_n in range(len(all_dirs)):
+    im_array = np.zeros([512, 512, len(all_dirs[dir_n])]).astype('float32')
 
-    im = plan.pixel_array
-    im[im < low_bnd] = low_bnd
-    im[im > up_bnd] = up_bnd
-    im2 = (im - im.min())/(im.max() - im.min())
+    for f in all_dirs[dir_n]:
+        plan = dicom.read_file(src + '/' + dir_names[dir_n] +  '/' + f)
 
-    im_array[:, :, plan.InstanceNumber-1] = im.astype('float32')
+        im = plan.pixel_array
+        im[im < low_bnd] = low_bnd
+        im[im > up_bnd] = up_bnd
+        im2 = (im - im.min())/(im.max() - im.min())
 
-    # plt.imshow(im, cmap='gray')
-    # plt.show()
-    # plt.waitforbuttonpress()
+        im_array[:, :, plan.InstanceNumber-1] = im.astype('float32')
 
-plt.imshow(im_array[:, :, 50], cmap='gray')
+        # plt.imshow(im, cmap='gray')
+        # plt.show()
+        # plt.waitforbuttonpress()
+
+    # plt.imshow(im_array[:, :, 50], cmap='gray')
+
+    np.save('data' + str(dir_n), im_array)
+
