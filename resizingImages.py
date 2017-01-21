@@ -8,7 +8,6 @@ from matplotlib import pyplot as plt
 from os import listdir
 from os.path import isfile, join, isdir
 import numpy as np
-import cv2
 
 src = '/Users/nripesh/Downloads/sample_images/'
 
