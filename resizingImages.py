@@ -71,10 +71,6 @@ for dir_n in range(len(all_dirs)):
     print(im_reshaped.shape)
     print()
 
-    # plt.imshow(im, cmap='gray')
-    # plt.show()
-    # plt.waitforbuttonpress()
-
-# plt.imshow(im_array[:, :, 50], cmap='gray')
+    np.save('data_resized' + str(dir_n), im_reshaped)
 
 
