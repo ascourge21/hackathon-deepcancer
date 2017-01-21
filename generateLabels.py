@@ -33,9 +33,13 @@ for i in range(1, len(content)):
 file = open("labels.txt", 'w')
 for i in range(len(dir_names)):
     dir = dir_names[i]
+    found = False
     for j in range(len(folders)):
         if folders[j] == dir:
             print("found")
             file.write(dir + ", " + labels[j] + '\n')
+            found = True
+    if not found:
+        print("not found")
 
 file.close()
