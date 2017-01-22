@@ -70,6 +70,6 @@ for dir_n in range(len(all_dirs)):
     print(im_reshaped.shape)
     print()
 
-    np.save('data_resized' + str(dir_n), im_reshaped)
+    np.save(dir_names[dir_n], im_reshaped)
 
 

@@ -39,7 +39,7 @@ for dir_n in range(len(all_dirs)):
     im_array = np.zeros([512, 512, len(all_dirs[dir_n])]).astype('float32')
 
     for f in all_dirs[dir_n]:
-        plan = dicom.read_file(src + '/' + dir_names[dir_n] +  '/' + f)
+        plan = dicom.read_file(src + '/' + dir_names[dir_n] + '/' + f)
 
         im = plan.pixel_array
         im[im < low_bnd] = low_bnd
