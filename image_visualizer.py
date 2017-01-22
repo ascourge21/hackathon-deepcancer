@@ -3,6 +3,8 @@ from matplotlib import pyplot as plt
 from os import listdir
 from os.path import isfile, join, isdir
 import numpy as np
+from pygaze import eyetracker
+
 
 src = '/Users/muhammadkhan/Desktop/hackathon-deepcancer/sample_images/'
 
@@ -51,6 +53,7 @@ for f in all_dirs[dir_n]:
     #print(plan.InstanceNumber)
     im_array[:, :, plan.InstanceNumber-1] = im.astype('float32')
         
+#tracker = eyetracker.EyeTracker(None)
 fig = plt.figure()
 fig.canvas.mpl_connect('key_press_event', flip_image)
 ax = fig.add_subplot(111)
